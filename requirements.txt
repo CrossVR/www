@@ -2,9 +2,9 @@ asn1crypto==0.24.0
 bcrypt==3.1.7
 beautifulsoup4==4.8.1
 certifi==2019.9.11
-cffi==1.12.3
+cffi==1.16.0
 chardet==3.0.4
-cryptography==2.7
+cryptography==42.0.7
 Django==2.2.28
 django-annoying==0.10.5
 django-blog-zinnia==0.20
@@ -23,7 +23,7 @@ Markdown==3.1.1
 mots-vides==2015.5.11
 packaging==19.0
 paramiko==2.6.0
-Pillow==6.2.1
+Pillow==10.3.0
 pip-autoremove==0.9.1
 polib==1.1.0
 psycopg2-binary==2.8.4
