@@ -40,6 +40,8 @@ class ReleaseVersion(DownloadableVersion):
 
     objects = models_utils.DefaultSelectOrPrefetchManager(prefetch_related=['artifacts'])
 
+    is_tagged = models.BooleanField(default=True)
+
     def get_absolute_url(self):
         return reverse('downloads_view_release', args=[self.shortrev])
 
