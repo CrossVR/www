@@ -2,16 +2,33 @@
 
 {% load i18n %}
 
-{% block "title" %}{% blocktrans %}{{ branch }} branch - page {{ page }}{% endblocktrans %}{% endblock %}
+{% block "title" %}
+
+{% if branch == "releases" %}
+{% blocktrans %}Releases - page {{ page }}{% endblocktrans %}
+{% else %}
+{% blocktrans %}{{ branch }} branch - page {{ page }}{% endblocktrans %}
+{% endif %}
+
+{% endblock %}
 
 {% block "body" %}
+
 <div class="page-header">
+    {% if branch == "releases" %}
+    <h1>{% blocktrans %}Releases - page {{ page }}{% endblocktrans %}</h1>
+    {% else %}
     <h1>{% blocktrans %}<tt>{{ branch }}</tt> branch - page {{ page }}{% endblocktrans %}</h1>
+    {% endif %}
 </div>
 
 {% include "downloads-list-pagi.html" %}
 
+{% if branch == "releases" %}
+{% include "downloads-release.html" with builds=page_obj.object_list %}
+{% else %}
 {% include "downloads-devrel.html" with builds=page_obj.object_list %}
+{% endif %}
 
 {% include "downloads-list-pagi.html" %}
 
