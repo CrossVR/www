@@ -28,19 +28,20 @@ class DownloadableVersion(models.Model):
     of Dolphin."""
 
     date = models.DateTimeField(auto_now_add=True)
+    shortrev = models.CharField(max_length=64)
+    hash = models.CharField(max_length=64, db_index=True)
+    description = models.TextField()
+
+    def __str__(self):
+        return _("Dolphin %s") % self.shortrev
 
 class ReleaseVersion(DownloadableVersion):
     """Download infos for a release version (2.0, 3.0, ...)"""
 
     objects = models_utils.DefaultSelectOrPrefetchManager(prefetch_related=['artifacts'])
 
-    version = models.CharField(max_length=64)
-
-    def __str__(self):
-        return _("Dolphin %s") % self.version
-
     def get_absolute_url(self):
-        return reverse('downloads_view_release', args=[self.version])
+        return reverse('downloads_view_release', args=[self.shortrev])
 
 class DevVersion(DownloadableVersion):
     """Download infos for a developement/nightly release"""
@@ -48,13 +49,7 @@ class DevVersion(DownloadableVersion):
     objects = models_utils.DefaultSelectOrPrefetchManager(prefetch_related=['artifacts'])
 
     branch = models.CharField(max_length=64, db_index=True)
-    shortrev = models.CharField(max_length=64)
-    hash = models.CharField(max_length=64, unique=True, db_index=True)
     author = models.CharField(max_length=128)
-    description = models.TextField()
-
-    def __str__(self):
-        return _("Dolphin %s") % self.revbranch
 
     @property
     def revbranch(self):

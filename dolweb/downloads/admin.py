@@ -13,7 +13,7 @@ class ArtifactAdmin(admin.StackedInline):
     model = Artifact
 
 class ReleaseVersionAdmin(admin.ModelAdmin):
-    list_display = ('version', 'date')
+    list_display = ('shortrev', 'date')
     ordering = ('-date',)
     inlines = [ArtifactAdmin]
 admin.site.register(ReleaseVersion, ReleaseVersionAdmin)
