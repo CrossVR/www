@@ -16,6 +16,9 @@ urlpatterns = [
     url(r'^dev/(?P<branch>.*?)/(?P<name>.*?)/$', views.view_dev_release_by_name,
         name='downloads_view_devrel_by_name'),
 
+    url(r'^release/(?P<name>.*?)/$', views.view_release,
+        name='downloads_view_release'),
+
     url(r'^latest/(?P<branch>[a-zA-Z0-9_-]+)/$', views.get_latest, name='downloads_get_latest'),
     url(r'^buildlist$', views.buildlist, name='buildlist_index'),
 ]

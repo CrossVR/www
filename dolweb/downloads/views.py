@@ -79,6 +79,13 @@ def view_dev_release_by_name(request, branch, name):
 
     return { 'ver': release }
 
+@vary_on_headers('User-Agent')
+@render_to('downloads-view-release.html')
+def view_release(request, name):
+    release = get_object_or_404(ReleaseVersion, shortrev=name)
+
+    return { 'ver': release }
+
 @cache_control(max_age=15)
 @vary_on_headers('User-Agent')
 @render_to('downloads-list.html')

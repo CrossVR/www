@@ -1,0 +1,39 @@
+{% extends "_base.html" %}
+
+{% load humanize %}
+{% load i18n %}
+
+{% block "title" %}{% blocktrans with br=ver.shortrev %}Information on {{ br }}{% endblocktrans %}{% endblock %}
+
+{% block "body" %}
+<div class="page-header">
+    <h1>{% blocktrans with br=ver.shortrev %}Information for {{ br }}{% endblocktrans %}</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-5">
+        <dl>
+            <dt>{% trans "Version" %}
+            <dd>{{ ver.shortrev }}
+
+            <dt>{% trans "Date" %}
+            <dd title="{{ ver.date|date:"c" }}">{{ ver.date|naturaltime }}
+
+        </dl>
+
+        {% include "downloads-links.html" %}
+    </div>
+    <div class="col-md-7">
+        <dl>
+            <dt>{% trans "Description" %}
+            <dd>
+            {% if ver.description %}
+            <pre>{{ ver.description }}</pre>
+            {% else %}
+            <pre>{% trans "No description found." %}</pre>
+            {% endif %}
+        </dl>
+    </div>
+</div>
+
+{% endblock %}
