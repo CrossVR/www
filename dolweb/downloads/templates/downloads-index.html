@@ -21,19 +21,19 @@
 </div>
 
 <div id="download-beta">
-<h1>{% trans "Beta versions" %}</h1>
+<h1>{% trans "Releases" %}</h1>
     
 <div class="alert alert-info">{% blocktrans %}
-    <p>Beta versions are released every month, usually accompanied by a <em>Progress Report</em>
-    article. Use the latest beta version if you prefer stability over the newest features in the
+    <p>Releases are created every few months, usually accompanied by a <em>Progress Report</em>
+    article. Use the latest release if you prefer stability over the newest features in the
     <a href="#download-dev">development versions</a>.</p>
 {% endblocktrans %}</div>
 
 <div class="alert alert-danger">
-    <p>{% blocktrans %}The Windows beta versions <b>require</b> the <a href="https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads">64-bit Visual C++ redistributable for Visual Studio 2022</a> to be installed.{% endblocktrans %}</p>
+    <p>{% blocktrans %}The Windows releases <b>require</b> the <a href="https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads">64-bit Visual C++ redistributable for Visual Studio 2022</a> to be installed.{% endblocktrans %}</p>
 </div>
 
-{% include "downloads-devrel.html" with builds=beta_builds primclass='btn-info' %}
+{% include "downloads-release.html" with builds=releases primclass='btn-info' %}
 
 </div>
 
@@ -43,8 +43,8 @@
 <div class="alert alert-info">
     <p>{% blocktrans %}Development versions are released every time a developer makes a change to
     Dolphin, several times every day! Using development versions enables you to
-    use the latest and greatest improvements to the project. They are however
-    less tested than <a href="#download-beta">beta versions</a> of the emulator.{% endblocktrans %}</p>
+    use the latest and greatest improvements to the project. However, they are
+    less tested than <a href="#download-beta">releases</a>.{% endblocktrans %}</p>
 </div>
 
 <div class="alert alert-danger">

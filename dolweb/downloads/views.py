@@ -25,18 +25,14 @@ _addbuild_lock = multiprocessing.Lock()
 def index(request):
     """Displays the downloads index"""
 
-    releases = ReleaseVersion.objects.order_by('-date')
+    releases = ReleaseVersion.objects.order_by('-date')[:5]
     master_builds = (DevVersion.objects.filter(branch='master')
                                        .order_by('-date')
                                        [:10])
-    beta_track = (UpdateTrack.objects.filter(name='beta')
-                                     .order_by('-version__date')
-                                     [:5])
-    beta_builds = [track.version for track in beta_track]
     last_master = master_builds[0] if len(master_builds) else None
 
     return { 'releases': releases, 'master_builds': master_builds,
-             'beta_builds': beta_builds, 'last_master': last_master }
+             'last_master': last_master }
 
 @cache_control(max_age=15)
 @vary_on_headers('User-Agent')
