@@ -138,16 +138,26 @@ def new(request):
     try:
         _addbuild_lock.acquire()
 
-        try:
-            build_obj = DevVersion.objects.get(hash=hash)
-        except DevVersion.DoesNotExist:
-            build_obj = DevVersion()
-            build_obj.branch = branch
-            build_obj.shortrev = shortrev
-            build_obj.hash = hash
-            build_obj.author = author
-            build_obj.description = description
-            build_obj.save()
+        if branch == "releases":
+            try:
+                build_obj = ReleaseVersion.objects.get(hash=hash)
+            except ReleaseVersion.DoesNotExist:
+                build_obj = ReleaseVersion()
+                build_obj.shortrev = shortrev
+                build_obj.hash = hash
+                build_obj.description = description
+                build_obj.save()
+        else:
+            try:
+                build_obj = DevVersion.objects.get(hash=hash)
+            except DevVersion.DoesNotExist:
+                build_obj = DevVersion()
+                build_obj.branch = branch
+                build_obj.shortrev = shortrev
+                build_obj.hash = hash
+                build_obj.author = author
+                build_obj.description = description
+                build_obj.save()
 
         try:
             artifact_obj = Artifact.objects.get(
