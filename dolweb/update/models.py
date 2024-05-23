@@ -2,12 +2,12 @@
 # SPDX-License-Identifier: MIT
 
 from django.db import models
-from dolweb.downloads.models import DevVersion
+from dolweb.downloads.models import DownloadableVersion
 
 class UpdateTrack(models.Model):
     name = models.CharField(max_length=64, db_index=True)
     version = models.ForeignKey(
-        DevVersion,
+        DownloadableVersion,
         on_delete=models.CASCADE,
         db_index=True,
         related_name='update_tracks')
