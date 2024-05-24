@@ -44,7 +44,17 @@ def _changelog_from_dev_versions_list(versions):
 def _changelog_from_update_track(versions):
     changelog_entries = []
     for version in versions:
-        data = version.version.description_data
+        if version.version is DevVersion:
+            data = version.version.description_data
+        else:
+            # The update dialog works without these fields as long as changelog_html is set.
+            # However, let's fill them with some generic data anyways, just in case.
+            data = {
+                "short_descr": "Dolphin release",
+                "author": "Dolphin Emulator Project",
+                "author_url": "https://dolphin-emu.org/",
+            }
+
         data['shortrev'] = version.version.shortrev
         data['changelog_html'] = version.changelog_text
         changelog_entries.append(data)
