@@ -4,7 +4,7 @@
 from django.conf import settings
 from django.http import HttpResponseBadRequest, HttpResponseNotFound, JsonResponse
 from django.views.decorators.cache import cache_control
-from dolweb.downloads.models import DevVersion
+from dolweb.downloads.models import DevVersion, ReleaseVersion
 from dolweb.update.models import UpdateTrack
 
 # XXX: This is an ugly abstraction break. It should likely be a property of the
@@ -162,9 +162,12 @@ def _check_on_manually_maintained_track(request, track, version, old_platform, n
         return _error_response(404, "Unknown platform %r" % new_platform)
 
     try:
-        version = DevVersion.objects.get(hash=version)
-    except DevVersion.DoesNotExist:
-        return _error_response(404, "No version %r exists" % version)
+        version = ReleaseVersion.objects.get(hash=version)
+    except ReleaseVersion.DoesNotExist:
+        try:
+            version = DevVersion.objects.get(hash=version)
+        except DevVersion.DoesNotExist:
+            return _error_response(404, "No version %r exists" % version)
 
     newer_versions = UpdateTrack.objects.filter(
         name=track, version__date__gt=version.date).order_by('-version__date')
