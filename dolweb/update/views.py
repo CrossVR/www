@@ -148,11 +148,15 @@ def _check_on_auto_maintained_track(request, track, version, old_platform, new_p
     # newer versions.
 
     branch = settings.AUTO_MAINTAINED_UPDATE_TRACKS[track]
+
     try:
         version = DevVersion.objects.get(branch=branch, hash=version)
     except DevVersion.DoesNotExist:
-        return _error_response(404, "No version %r on track %r (branch: %r) for platform %r" %
-                               (version, track, branch, new_platform))
+        try:
+            version = ReleaseVersion.objects.get(hash=version)
+        except ReleaseVersion.DoesNotExist:
+            return _error_response(404, "No version %r on track %r (branch: %r) for platform %r" %
+                                   (version, track, branch, new_platform))
 
     newer_versions = DevVersion.objects.filter(
         branch=branch,
