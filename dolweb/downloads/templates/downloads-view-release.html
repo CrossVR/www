@@ -25,6 +25,14 @@
     </div>
     <div class="col-md-7">
         <dl>
+            {% if ver.is_tagged %}
+            <dt>{% trans "Tag" %}
+            <dd class="commithash"><a href="{{ GIT_TAG_URL }}{{ ver.shortrev }}">{{ ver.shortrev }}</a></dd>
+            {% else %}
+            <dt>{% trans "Commit" %}
+            <dd class="commithash"><a href="{{ GIT_COMMIT_URL }}{{ ver.hash }}">{{ ver.hash }}</a></dd>
+            {% endif %}
+            
             <dt>{% trans "Description" %}
             <dd>
             {% if ver.description %}

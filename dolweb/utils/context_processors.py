@@ -11,6 +11,7 @@ def website_urls(request):
         "GIT_BROWSE_URL": settings.GIT_BROWSE_URL,
         "GIT_CLONE_URL": settings.GIT_CLONE_URL,
         "GIT_COMMIT_URL": settings.GIT_COMMIT_URL,
+        "GIT_TAG_URL": settings.GIT_TAG_URL,
         "WEBSITE_GIT_URL": settings.WEBSITE_GIT_URL,
         "ISSUES_URL": settings.ISSUES_URL,
         "DEFAULT_HOST": settings.DEFAULT_HOST,
