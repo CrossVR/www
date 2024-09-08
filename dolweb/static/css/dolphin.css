@@ -170,6 +170,17 @@ div#download-stable h1, div#download-dev h1, div#download-source h1 {
     text-align: center;
 }
 
+.skg-logo {
+    height: 40px;
+    display: inline-block;
+    margin-right: 1em;
+}
+
+.skg-btn {
+    margin-left: 1em;
+    text-align: center;
+}
+
 .fb-like {
     height: 20px;
     display: inline-block;
