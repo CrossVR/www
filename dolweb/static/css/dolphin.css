@@ -185,7 +185,7 @@ div#download-stable h1, div#download-dev h1, div#download-source h1 {
     }
 
     .skg-alert {
-        background-image: url("../img/skglogo.svg");
+        background-image: url("../img/skglogo.png");
         background-repeat: no-repeat;
         background-position-y: center;
         background-size: 80px;
